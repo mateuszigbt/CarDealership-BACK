@@ -30,8 +30,8 @@ namespace Infrastructure.Seed
 
             var admin = new User
             {
-                Name = "Admin",
-                Surename = "System",
+                Name = "admin",
+                Surename = "system",
                 Email = "admin@cardealer.com",
                 Password = BCrypt.Net.BCrypt.HashPassword("admin"),
                 Role = UserRole.Admin
