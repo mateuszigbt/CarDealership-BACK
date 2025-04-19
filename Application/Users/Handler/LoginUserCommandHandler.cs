@@ -35,6 +35,7 @@ namespace Application.Users.Handler
 
             var claims = new Claim[]
             {
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                 new Claim(ClaimTypes.Email, user.Email)
             };
 
