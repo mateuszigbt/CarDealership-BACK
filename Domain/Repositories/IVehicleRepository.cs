@@ -9,7 +9,7 @@ namespace Domain.Repositories
 {
     public interface IVehicleRepository
     {
-        Task<IEnumerable<Vehicle>> GetAllAsync();
+        Task<IEnumerable<Vehicle>> GetAllVehicleAsync();
         Task AddVehicleAsync(Vehicle vehicle);
         Task UpdateVehicleAsync(Vehicle vehicle);
         Task DeleteVehicleAsync(Vehicle vehicle);
