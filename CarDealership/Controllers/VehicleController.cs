@@ -33,5 +33,19 @@ namespace CarDealership.Controllers
             var id = await _mediator.Send(addVehicleCommand);
             return Ok(new {id});
         }
+
+        [HttpGet("all")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetAllVehicles([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 5)
+        {
+            var query = new GetAllVehicleCommand
+            {
+                PageNumber = pageNumber,
+                PageSize = pageSize
+            };
+
+            var vehicles = await _mediator.Send(query);
+            return Ok(vehicles);
+        }
     }
 }
