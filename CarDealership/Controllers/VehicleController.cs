@@ -47,5 +47,19 @@ namespace CarDealership.Controllers
             var vehicles = await _mediator.Send(query);
             return Ok(vehicles);
         }
+
+        [HttpDelete("delete={vehicleId}")]
+        public async Task<IActionResult> DeleteVehicle(int vehicleId)
+        {
+            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+
+            var result = await _mediator.Send(new DeleteVehicleCommand
+            {
+                VehicleId = vehicleId,
+                UserId= userId
+            });
+
+            return result ? NoContent() : Unauthorized();
+        }
     }
 }

@@ -30,6 +30,11 @@ namespace Infrastructure.Repositories
             await _context.SaveChangesAsync();
         }
 
+        public async Task<Vehicle?> GetVehicleByIdAsync(int id)
+        {
+            return await _context.Vehicles.FindAsync(id);
+        }
+
         public async Task UpdateVehicleAsync(Vehicle vehicle)
         {
             _context.Vehicles.Update(vehicle);
