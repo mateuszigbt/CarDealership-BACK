@@ -13,5 +13,6 @@ namespace Domain.Repositories
         Task AddVehicleAsync(Vehicle vehicle);
         Task UpdateVehicleAsync(Vehicle vehicle);
         Task DeleteVehicleAsync(Vehicle vehicle);
+        Task<Vehicle> GetVehicleByIdAsync(int id);
     }
 }
