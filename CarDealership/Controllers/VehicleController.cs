@@ -63,6 +63,22 @@ namespace CarDealership.Controllers
             return Ok(vehicle);
         }
 
+        [HttpPut("update{vehicleId}")]
+        public async Task<IActionResult> UpdateVehicle(int vehicleId, [FromBody] UpdateVehicleDto dto)
+        {
+            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+            var command = new UpdateVehicleCommand
+            {
+                VehicleId = vehicleId,
+                UserId = userId,
+                UpdateVehicle = dto
+            };
+
+            var result = await _mediator.Send(command);
+            return result ? NoContent() : Unauthorized();
+        }
+
         [HttpDelete("delete={vehicleId}")]
         public async Task<IActionResult> DeleteVehicle(int vehicleId)
         {
