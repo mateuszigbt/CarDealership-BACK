@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Users.Command
+namespace Application.Users.Command.Vehicle
 {
     public class DeleteVehicleCommand : IRequest<bool>
     {

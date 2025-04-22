@@ -1,4 +1,4 @@
-﻿using Application.Users.Command;
+﻿using Application.Users.Command.ResetPassword;
 using Domain.Entities;
 using Domain.Enums;
 using Domain.Repositories;
@@ -9,13 +9,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Users.Handler
+namespace Application.Users.Handler.Auth
 {
     public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, int>
     {
         private readonly IUserRepository _userRepository;
 
-        public RegisterUserCommandHandler(IUserRepository userRepository) 
+        public RegisterUserCommandHandler(IUserRepository userRepository)
         {
             _userRepository = userRepository;
         }

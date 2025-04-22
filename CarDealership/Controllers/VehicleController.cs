@@ -1,5 +1,6 @@
 ﻿using Application.Users.Command;
-using Application.Users.DTOs;
+using Application.Users.Command.Vehicle;
+using Application.Users.DTOs.Vehicle;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

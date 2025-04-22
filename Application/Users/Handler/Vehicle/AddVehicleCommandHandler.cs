@@ -1,4 +1,4 @@
-﻿using Application.Users.Command;
+﻿using Application.Users.Command.Vehicle;
 using Domain.Entities;
 using Domain.Repositories;
 using MediatR;
@@ -9,20 +9,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Users.Handler
+namespace Application.Users.Handler.Vehicle
 {
     public class AddVehicleCommandHandler : IRequestHandler<AddVehicleCommand, int>
     {
         private readonly IVehicleRepository _vehicleRepository;
 
-        public AddVehicleCommandHandler(IVehicleRepository vehicleRepository) 
+        public AddVehicleCommandHandler(IVehicleRepository vehicleRepository)
         {
             _vehicleRepository = vehicleRepository;
         }
 
         public async Task<int> Handle(AddVehicleCommand request, CancellationToken cancellationToken)
         {
-            var vehicle = new Vehicle
+            var vehicle = new Domain.Entities.Vehicle
             {
                 TypeOffer = request.Vehicle.TypeOffer,
                 IsDamaged = request.Vehicle.IsDamaged,

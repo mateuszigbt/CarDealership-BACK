@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Users.DTOs
+namespace Application.Users.DTOs.Vehicle
 {
     public class AddVehicleDto
     {
