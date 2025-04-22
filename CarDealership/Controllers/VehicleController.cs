@@ -49,6 +49,20 @@ namespace CarDealership.Controllers
             return Ok(vehicles);
         }
 
+        [HttpGet("getVehicleById={vehicleId}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetByIdVehicle(int vehicleId)
+        {
+            var vehicle = await _mediator.Send(new GetVehicleByIdCommand { VehicleId = vehicleId });
+
+            if (vehicle == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(vehicle);
+        }
+
         [HttpDelete("delete={vehicleId}")]
         public async Task<IActionResult> DeleteVehicle(int vehicleId)
         {
