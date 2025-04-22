@@ -54,6 +54,7 @@ namespace CarDealership.Controllers
         public async Task<IActionResult> GetByIdVehicle(int vehicleId)
         {
             var vehicle = await _mediator.Send(new GetVehicleByIdCommand { VehicleId = vehicleId });
+
             if (vehicle == null)
             {
                 return NotFound();
