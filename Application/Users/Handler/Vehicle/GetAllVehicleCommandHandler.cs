@@ -1,5 +1,5 @@
-﻿using Application.Users.Command;
-using Application.Users.DTOs;
+﻿using Application.Users.Command.Vehicle;
+using Application.Users.DTOs.Vehicle;
 using Domain.Repositories;
 using MediatR;
 using System;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Users.Handler
+namespace Application.Users.Handler.Vehicle
 {
     public class GetAllVehicleCommandHandler : IRequestHandler<GetAllVehicleCommand, List<GetAllVehicleDto>>
     {

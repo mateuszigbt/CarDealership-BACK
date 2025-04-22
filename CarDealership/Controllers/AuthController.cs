@@ -1,4 +1,4 @@
-﻿using Application.Users.Command;
+﻿using Application.Users.Command.ResetPassword;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

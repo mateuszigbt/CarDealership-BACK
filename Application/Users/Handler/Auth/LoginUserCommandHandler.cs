@@ -1,4 +1,4 @@
-﻿using Application.Users.Command;
+﻿using Application.Users.Command.ResetPassword;
 using Domain.Repositories;
 using MediatR;
 using Microsoft.Extensions.Configuration;
@@ -11,7 +11,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Users.Handler
+namespace Application.Users.Handler.Auth
 {
     public class LoginUserCommandHandler : IRequestHandler<LoginUserCommand, string>
     {
@@ -28,7 +28,7 @@ namespace Application.Users.Handler
         {
             var user = await _userRepository.GetByEmailAsync(request.User.Email);
 
-            if (user == null || !BCrypt.Net.BCrypt.Verify(request.User.Password, user.Password)) 
+            if (user == null || !BCrypt.Net.BCrypt.Verify(request.User.Password, user.Password))
             {
                 throw new UnauthorizedAccessException("Invalid credentials");
             }

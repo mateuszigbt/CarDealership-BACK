@@ -1,4 +1,4 @@
-﻿using Application.Users.Command;
+﻿using Application.Users.Command.Vehicle;
 using Domain.Repositories;
 using MediatR;
 using System;
@@ -7,13 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Users.Handler
+namespace Application.Users.Handler.Vehicle
 {
     public class DeleteVehicleCommandHandler : IRequestHandler<DeleteVehicleCommand, bool>
     {
         private readonly IVehicleRepository _vehicleRepository;
 
-        public DeleteVehicleCommandHandler(IVehicleRepository vehicleRepository) 
+        public DeleteVehicleCommandHandler(IVehicleRepository vehicleRepository)
         {
             _vehicleRepository = vehicleRepository;
         }
@@ -22,7 +22,7 @@ namespace Application.Users.Handler
         {
             var vehicle = await _vehicleRepository.GetVehicleByIdAsync(request.VehicleId);
 
-            if (vehicle == null) 
+            if (vehicle == null)
             {
                 return false;
             }

@@ -13,6 +13,7 @@ namespace Infrastructure.Data
     {
         public DbSet<User> Users => Set<User>();
         public DbSet<Vehicle> Vehicles => Set<Vehicle>();
+        public DbSet<PasswordResetToken> PasswordResetTokens => Set<PasswordResetToken>();
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
