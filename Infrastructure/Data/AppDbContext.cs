@@ -14,6 +14,8 @@ namespace Infrastructure.Data
         public DbSet<User> Users => Set<User>();
         public DbSet<Vehicle> Vehicles => Set<Vehicle>();
         public DbSet<PasswordResetToken> PasswordResetTokens => Set<PasswordResetToken>();
+        public DbSet<Correspondence> Correspondences => Set<Correspondence>();
+        public DbSet<Message> Messages => Set<Message>();
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
@@ -27,6 +29,34 @@ namespace Infrastructure.Data
                 .WithOne(t => t.User)
                 .HasForeignKey(t => t.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Correspondence>()
+                .HasOne(c => c.Vehicle)
+                .WithMany()
+                .HasForeignKey(c => c.VehicleId);
+
+            modelBuilder.Entity<Correspondence>()
+                .HasOne(c => c.Sender)
+                .WithMany()
+                .HasForeignKey(c => c.SenderId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Correspondence>()
+                .HasOne(c => c.Receiver)
+                .WithMany()
+                .HasForeignKey(c => c.ReceiverId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Message>()
+                .HasOne(m => m.Correspondence)
+                .WithMany(c => c.Messages)
+                .HasForeignKey(m => m.CorrespondenceId);
+
+            modelBuilder.Entity<Message>()
+                .HasOne(m => m.Sender)
+                .WithMany()
+                .HasForeignKey(m => m.SenderId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             base.OnModelCreating(modelBuilder);
         }
