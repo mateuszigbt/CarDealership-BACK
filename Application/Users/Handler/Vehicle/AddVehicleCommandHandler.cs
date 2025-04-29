@@ -2,11 +2,13 @@
 using Domain.Entities;
 using Domain.Repositories;
 using MediatR;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
+using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Application.Users.Handler.Vehicle
@@ -14,14 +16,41 @@ namespace Application.Users.Handler.Vehicle
     public class AddVehicleCommandHandler : IRequestHandler<AddVehicleCommand, int>
     {
         private readonly IVehicleRepository _vehicleRepository;
+        private readonly IHostEnvironment _environment;
 
-        public AddVehicleCommandHandler(IVehicleRepository vehicleRepository)
+        public AddVehicleCommandHandler(IVehicleRepository vehicleRepository, IHostEnvironment environment)
         {
             _vehicleRepository = vehicleRepository;
+            _environment = environment;
         }
 
         public async Task<int> Handle(AddVehicleCommand request, CancellationToken cancellationToken)
         {
+            var filePaths = new List<string>();
+
+            if (request.Vehicle.SourceImages != null && request.Vehicle.SourceImages.Length > 0)
+            {
+                var uploadsFolder = Path.Combine(_environment.ContentRootPath, "uploads");
+
+                if (!Directory.Exists(uploadsFolder))
+                {
+                    Directory.CreateDirectory(uploadsFolder);
+                }
+
+                foreach (var file in request.Vehicle.SourceImages)
+                {
+                    var uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                    var fullPath = Path.Combine(uploadsFolder, uniqueFileName);
+
+                    using (var stream = new FileStream(fullPath, FileMode.Create))
+                    {
+                        await file.CopyToAsync(stream);
+                    }
+
+                    filePaths.Add(Path.Combine("uploads", uniqueFileName).Replace("\\", "/"));
+                }
+            }
+
             var vehicle = new Domain.Entities.Vehicle
             {
                 TypeOffer = request.Vehicle.TypeOffer,
@@ -42,7 +71,7 @@ namespace Application.Users.Handler.Vehicle
                 Version = request.Vehicle.Version,
                 Generation = request.Vehicle.Generation,
                 BodyType = request.Vehicle.BodyType,
-                SourceImages = request.Vehicle.SourceImages,
+                SourceImages = filePaths.ToArray(),
                 TitleOffer = request.Vehicle.TitleOffer,
                 Description = request.Vehicle.Description,
                 Price = request.Vehicle.Price,

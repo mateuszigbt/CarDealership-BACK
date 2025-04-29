@@ -22,6 +22,7 @@ namespace Infrastructure.Data
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IVehicleRepository, VehicleRepository>();
             services.AddScoped<ICorrespondenceRepository, CorrespondenceRepository>();
+            services.AddScoped<IFavoriteRepository, FavoriteRepository>();
 
             services.AddScoped<AdminSeeder>();
 

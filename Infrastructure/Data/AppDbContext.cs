@@ -16,6 +16,7 @@ namespace Infrastructure.Data
         public DbSet<PasswordResetToken> PasswordResetTokens => Set<PasswordResetToken>();
         public DbSet<Correspondence> Correspondences => Set<Correspondence>();
         public DbSet<Message> Messages => Set<Message>();
+        public DbSet<Favorite> Favorites => Set<Favorite>();
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
@@ -57,6 +58,19 @@ namespace Infrastructure.Data
                 .WithMany()
                 .HasForeignKey(m => m.SenderId)
                 .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Favorite>()
+                .HasKey(f => new { f.UserId, f.VehicleId });
+
+            modelBuilder.Entity<Favorite>()
+                .HasOne(f => f.User)
+                .WithMany(u => u.Favorites)
+                .HasForeignKey(f => f.UserId);
+
+            modelBuilder.Entity<Favorite>()
+                .HasOne(f => f.Vehicle)
+                .WithMany(u => u.FavoritedBy)
+                .HasForeignKey(f => f.VehicleId);
 
             base.OnModelCreating(modelBuilder);
         }

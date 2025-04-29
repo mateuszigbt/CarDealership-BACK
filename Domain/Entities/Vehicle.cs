@@ -33,5 +33,6 @@ namespace Domain.Entities
         public double Price { get; set; }
         public int UserId { get; set; }
         public User User { get; set; } = null!;
+        public ICollection<Favorite> FavoritedBy { get; set; }
     }
 }

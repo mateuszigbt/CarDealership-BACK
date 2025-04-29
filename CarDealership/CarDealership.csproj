@@ -24,4 +24,10 @@
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\uploads\1a3c8d34-f945-4fb6-8355-d8e027919392.png" />
+    <None Include="wwwroot\uploads\55a0b6bf-4f6c-4e1f-beb0-aad5638a9a70.png" />
+    <None Include="wwwroot\uploads\test.jpg" />
+  </ItemGroup>
+
 </Project>

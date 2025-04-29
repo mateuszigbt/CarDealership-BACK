@@ -16,7 +16,7 @@ namespace Domain.Entities
         public string Email { get; set; }
         public string Password { get; set; }
         public UserRole Role { get; set; } = UserRole.User;
-
         public ICollection<Vehicle> Vehicles { get; set; } = new List<Vehicle>();
+        public ICollection<Favorite> Favorites { get; set; }
     }
 }

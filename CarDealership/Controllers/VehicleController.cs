@@ -21,7 +21,7 @@ namespace CarDealership.Controllers
         }
 
         [HttpPost("create")]
-        public async Task<IActionResult> AddVehicle([FromBody] AddVehicleDto dto)
+        public async Task<IActionResult> AddVehicle([FromForm] AddVehicleDto dto)
         {
             var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
 
@@ -32,7 +32,7 @@ namespace CarDealership.Controllers
             };
 
             var id = await _mediator.Send(addVehicleCommand);
-            return Ok(new {id});
+            return Ok(new { id });
         }
 
         [HttpGet("all")]

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,7 +27,7 @@ namespace Application.Users.DTOs.Vehicle
         public string Version { get; set; }
         public string Generation { get; set; }
         public string BodyType { get; set; }
-        public string[] SourceImages { get; set; }
+        public IFormFile[] SourceImages { get; set; }
         public string TitleOffer { get; set; }
         public string Description { get; set; }
         public double Price { get; set; }
